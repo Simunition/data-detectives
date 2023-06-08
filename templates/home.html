@@ -3,21 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>Weather Predictor: 12hr -> 0hr</title>
+    <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
     <h1>Weather Predictor: 12hr -> 0hr </h1>
     <h2>Created By: Data Stormers</h2>
     
     <!-- Output results -->
-    <table>
-        <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
+    <table class="table">
+        <tr class="table_header">
+          {% for header in headings %}
+          <th class="table_cell">{{ header }}</th>
+          {% endfor %}
         </tr>
-        <tr>
-            <th>test</th>
-            <th>test2</th>
+        {% for row in data %}
+        <tr class="table_row">
+          {% for cell in row %}
+          <td class="table_cell">{{ cell }}</td>
+          {% endfor %}
         </tr>
+        {% endfor %}
+
     </table>
 
   </body>
