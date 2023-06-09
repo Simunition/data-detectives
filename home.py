@@ -1,6 +1,6 @@
 # home.py
 
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 
 app = Flask(__name__)
 
@@ -14,6 +14,17 @@ data = (
 @app.route("/")
 def home():
     return render_template("home.html", headings=headings, data=data)
-    
+
+@app.route("/getCSV")
+def getCSV():
+    with open("csv_out.csv") as fp:
+        csv = fp.read()
+   
+    return Response(
+        csv,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=results.csv"})
+
 if __name__ == "__main__":
     app.run(debug=True)
