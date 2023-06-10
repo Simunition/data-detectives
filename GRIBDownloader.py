@@ -8,7 +8,7 @@ ftp_user = "anonymous"
 ftp_pass = "anonymous"
 
 # Remote folder and file pattern
-remote_folder = "/pub/outgoing/fnmoc/models/navgem_0.5/2023/"
+remote_folder = "/pub/outgoing/fnmoc/models/navgem_0.5/"
 file_prefix = "US058GMET-GR1mdl.0018_0056_01200F0RL"
 file_suffix = "0100_005000-000000geop_ht"
 
@@ -52,21 +52,29 @@ def download_files_from_folder(folder_path):
     # Return to the parent directory
     ftp.cwd("..")
 
-# Recursive function to iterate through subfolders
-def explore_folder(folder_path):
-    ftp.cwd(folder_path)
+# Recursive function to iterate through year folders and subfolders
+def explore_year_folders():
+    # Change to the remote directory
+    ftp.cwd(remote_folder)
 
-    # Get list of subfolders
-    subfolders = []
-    ftp.retrlines("NLST", subfolders.append)
+    # Get list of year folders
+    year_folders = []
+    ftp.retrlines("NLST", year_folders.append)
 
-    # Iterate through subfolders
-    for subfolder in subfolders:
-        subfolder_path = os.path.join(folder_path, subfolder)
-        download_files_from_folder(subfolder_path)
+    # Iterate through year folders
+    for year_folder in year_folders:
+        if year_folder.isdigit() and 2013 <= int(year_folder) <= 2023:
+            year_folder_path = os.path.join(remote_folder, year_folder)
+            ftp.cwd(year_folder_path)
+            subfolders = []
+            ftp.retrlines("NLST", subfolders.append)
+            for subfolder in subfolders:
+                subfolder_path = os.path.join(year_folder_path, subfolder)
+                download_files_from_folder(subfolder_path)
+            ftp.cwd("..")
 
 # Start exploring the remote directory and download files from subfolders
-explore_folder(remote_folder)
+explore_year_folders()
 
 # Disconnect from the FTP server
 ftp.quit()
