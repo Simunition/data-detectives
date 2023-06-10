@@ -1,3 +1,4 @@
+import os
 import xarray as xr
 import cfgrib
 
@@ -19,4 +20,5 @@ def csv_conversion(meteo_arr):
     met_frame = met_data.to_dataframe()
     
     #Convert to CSV
+    os.makedirs('Output', exist_ok=True)
     met_frame.to_csv('Output/csv_out.csv')
