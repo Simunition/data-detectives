@@ -9,16 +9,21 @@ ftp_pass = "anonymous"
 
 # Remote folder and file pattern
 remote_folder = "/pub/outgoing/fnmoc/models/navgem_0.5/"
-file_prefix = "US058GMET-GR1mdl.0018_0056_01200F0RL"
-file_suffix = "0100_005000-000000geop_ht"
+grib_twelve_prefix = "US058GMET-GR1mdl.0018_0056_01200F0RL"
+grib_zero_prefix = "US058GMET-GR1mdl.0018_0056_00000F0RL"
+grib_suffix = "0100_005000-000000geop_ht"
 
 # Local folders for train and test data
-train_folder = "./train/"
-test_folder = "./test/"
+twelve_train_folder = "./train/012/"
+twelve_test_folder = "./test/012/"
+zero_train_folder = "./train/000/"
+zero_test_folder = "./test/000/"
 
 # Create local folders if they don't exist
-os.makedirs(train_folder, exist_ok=True)
-os.makedirs(test_folder, exist_ok=True)
+os.makedirs(twelve_train_folder, exist_ok=True)
+os.makedirs(twelve_test_folder, exist_ok=True)
+os.makedirs(zero_train_folder, exist_ok=True)
+os.makedirs(zero_test_folder, exist_ok=True)
 
 # Connect to FTP server
 ftp = FTP(ftp_host)
@@ -32,20 +37,32 @@ def download_files_from_folder(folder_path):
     file_list = []
     ftp.retrlines("NLST", file_list.append)
 
-    # Filter files based on pattern
-    filtered_files = [filename for filename in file_list if filename.startswith(file_prefix) and filename.endswith(file_suffix)]
+    # Separate files based on prefixes
+    twelve_files = [filename for filename in file_list if filename.startswith(grib_twelve_prefix) and filename.endswith(grib_suffix)]
+    zero_files = [filename for filename in file_list if filename.startswith(grib_zero_prefix) and filename.endswith(grib_suffix)]
 
     # Calculate the split for train and test files
-    total_files = len(filtered_files)
-    train_count = int(total_files * 0.9)
-    test_count = total_files - train_count
+    twelve_total_files = len(twelve_files)
+    twelve_train_count = int(twelve_total_files * 0.9)
+    twelve_test_count = twelve_total_files - twelve_train_count
 
-    # Randomly shuffle the file list
-    random.shuffle(filtered_files)
+    zero_total_files = len(zero_files)
+    zero_train_count = int(zero_total_files * 0.9)
+    zero_test_count = zero_total_files - zero_train_count
 
-    # Download and split the files
-    for i, filename in enumerate(filtered_files):
-        local_filepath = os.path.join(train_folder if i < train_count else test_folder, filename)
+    # Randomly shuffle the file lists
+    random.shuffle(twelve_files)
+    random.shuffle(zero_files)
+
+    # Download and split the twelve files
+    for i, filename in enumerate(twelve_files):
+        local_filepath = os.path.join(twelve_train_folder if i < twelve_train_count else twelve_test_folder, filename)
+        with open(local_filepath, "wb") as file:
+            ftp.retrbinary("RETR " + filename, file.write)
+
+    # Download and split the zero files
+    for i, filename in enumerate(zero_files):
+        local_filepath = os.path.join(zero_train_folder if i < zero_train_count else zero_test_folder, filename)
         with open(local_filepath, "wb") as file:
             ftp.retrbinary("RETR " + filename, file.write)
 
