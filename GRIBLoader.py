@@ -1,12 +1,15 @@
 import ProcesssGRIB as pg
 
-grib_input = 'GRIBFiles/US058GMET-GR1mdl.0018_0056_00000F0RL2023012512_0006_000000-000000geop_ht'
+#Convert GRIB to XARRAY
+def convert_grib(file_name):
+    grib_input = file_name
 
-#Convert GRIB to XArray
-x_out = pg.input_conversion(grib_input)
+    #Convert GRIB to XArray
+    x_out = pg.input_conversion(grib_input)
+    return x_out
 
 #Testing and CSV Output
-if __name__ == "__main__":
+def convert_grib_to_csv(xarray_in):
     #Convert XArray to CSV
-    pg.csv_conversion(x_out)
-    print(x_out)
+    pg.csv_conversion(xarray_in)
+    print(xarray_in)
