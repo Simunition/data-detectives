@@ -23,9 +23,11 @@ Python, Flask
 
 **Required Modules:**
 1. Anaconda Python
-2. pip install Flask
-3. pip install cfgrib
-4. apt install libeccodes-dev
-5. apt install libgeos-dev
-6. apt install libproj-dev
-7. apt install build-essential
+2. apt install libeccodes-dev
+3. apt install libgeos-dev
+4. apt install libproj-dev
+5. apt install build-essential
+6. pip install cfgrib
+7. pip install cartopy
+8. pip install matplotlib
+9. pip install Flask
