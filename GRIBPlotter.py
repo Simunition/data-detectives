@@ -36,9 +36,6 @@ def plot_grib(xarray_data):
     output_path = os.path.join('Output/', output_filename)
     plt.savefig(output_path)
 
-    # Show the plot
-    plt.show()
-
 if __name__ == "__main__":
     import os
     import random
