@@ -24,7 +24,12 @@ def csv_conversion(meteo_arr):
     met_frame.to_csv('Output/csv_out.csv', index=False)
 
 if __name__ == "__main__":
-    # Assuming you already have an XArray dataset, xarray_data
-    grib_file = '/home/cfc/Python/GRIBFiles/US058GMET-GR1mdl.0018_0056_00000F0RL2023012512_0006_000000-000000geop_ht'
+    import TestGRIB as tg
+    grib_file = tg.get_grib()
+
+    #Test XArray Conversion
     xarray_test = input_conversion(grib_file)
+    print(xarray_test)
+
+    #Test CSV Conversion
     csv_conversion(xarray_test)
