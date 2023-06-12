@@ -28,6 +28,19 @@ def plot_grib(xarray_data):
     plt.show()
 
 if __name__ == "__main__":
+    import os
+    import random
+    
+    # Get list of files in the test/000 folder
+    folder_path = "./download/test/000"
+    files = os.listdir(folder_path)
+
+    # Choose a random file from the list
+    random_file = random.choice(files)
+
+    # Create the full path to the chosen file
+    grib_file = os.path.join(folder_path, random_file)
+
     # Assuming you already have an XArray dataset, xarray_data
-    xarray_data = gl.convert_grib('/home/cfc/Python/GRIBFiles/US058GMET-GR1mdl.0018_0056_00000F0RL2023012512_0006_000000-000000geop_ht')
+    xarray_data = gl.convert_grib(grib_file)
     plot_grib(xarray_data)
