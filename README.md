@@ -19,9 +19,11 @@ Web application for the forecast 0-hour output.
 
 **Langauge / Framework:**
 
-Python, Flask
+1. Python (Flask, Jinja2)
+2. HTML, CSS
 
 **Required Modules:**
+
 1. Anaconda Python
 2. pip install Flask
 3. pip install cfgrib
