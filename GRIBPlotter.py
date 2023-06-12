@@ -2,8 +2,9 @@ import cfgrib
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 
+# Function to load and plot XArray data
 def plot_grib(xarray_input):
-    # Load the GRIB file and extract the data
+    # Load the XArrary and extract the data
     ds = xarray_input
     data = ds.data_vars['gh'].values
     lats = ds.coords['latitude'].values
