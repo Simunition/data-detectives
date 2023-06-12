@@ -56,13 +56,13 @@ def download_files_from_folder(folder_path):
 
     # Download and split the twelve files
     for i, filename in enumerate(twelve_files):
-        local_filepath = os.path.join(twelve_train_folder if i < twelve_train_count else twelve_test_folder, filename)
+        local_filepath = os.path.join(twelve_train_folder, filename) if i < twelve_train_count else os.path.join(twelve_test_folder, filename)
         with open(local_filepath, "wb") as file:
             ftp.retrbinary("RETR " + filename, file.write)
 
     # Download and split the zero files
     for i, filename in enumerate(zero_files):
-        local_filepath = os.path.join(zero_train_folder if i < zero_train_count else zero_test_folder, filename)
+        local_filepath = os.path.join(zero_train_folder, filename) if i < zero_train_count else os.path.join(zero_test_folder, filename)
         with open(local_filepath, "wb") as file:
             ftp.retrbinary("RETR " + filename, file.write)
 
