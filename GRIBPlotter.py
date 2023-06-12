@@ -9,10 +9,8 @@ def plot_grib(xarray_data):
     lats = xarray_data['latitude'].values
     lons = xarray_data['longitude'].values
 
-    # Extract the date
-    # Access the datetime component of the DataArray
+    # Access the datetime component of the DataArray and create date variables
     time_datetime = xarray_data['time'].dt
-    # Extract the year, month, and day as strings
     year = time_datetime.strftime('%Y').item()
     month = time_datetime.strftime('%m').item()
     day = time_datetime.strftime('%d').item()
@@ -32,6 +30,7 @@ def plot_grib(xarray_data):
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
     
+    # Save plot
     output_filename = "zero_hour_plot.png"
     output_path = os.path.join('Output/', output_filename)
     plt.savefig(output_path)
@@ -41,21 +40,18 @@ if __name__ == "__main__":
     import random
     import GRIBDownloader as gd
 
-    # Check if the test/000 folder exists
+    # Check if the test/000 folder exists, if not download the GRIB data for the specified year range
     test_folder = "./download/test/012"
     if not os.path.exists(test_folder):
-        # Download the GRIB data for the specified year range
         gd.download_grib_data(2013, 2013)
 
     # Get list of files in the test/000 folder
     files = os.listdir(test_folder)
 
-    # Choose a random file from the list
+    # Choose a random file from the list and create grib_file variable
     random_file = random.choice(files)
-
-    # Create the full path to the chosen file
     grib_file = os.path.join(test_folder, random_file)
 
-    # Assuming you already have an XArray dataset, xarray_data
+    # Convert to XArray and plot
     xarray_data = gl.convert_grib(grib_file)
     plot_grib(xarray_data)
