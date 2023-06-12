@@ -9,6 +9,14 @@ def plot_grib(xarray_data):
     lats = xarray_data['latitude'].values
     lons = xarray_data['longitude'].values
 
+    # Extract the date
+    # Access the datetime component of the DataArray
+    time_datetime = xarray_data['time'].dt
+    # Extract the year, month, and day as strings
+    year = time_datetime.strftime('%Y').item()
+    month = time_datetime.strftime('%m').item()
+    day = time_datetime.strftime('%d').item()
+
     # Create a plot with a world map using Cartopy
     fig = plt.figure(figsize=(10, 6))
     ax = plt.axes(projection=ccrs.PlateCarree())
@@ -20,7 +28,7 @@ def plot_grib(xarray_data):
     plt.contourf(lons, lats, data, transform=ccrs.PlateCarree())
 
     # Set title and labels
-    plt.title('500hPa Geopotential Height')
+    plt.title('500hPa Geopotential Height Zero-Hour Forecast for ' + month + '/' + day + '/' + year)
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
 
@@ -30,10 +38,12 @@ def plot_grib(xarray_data):
 if __name__ == "__main__":
     import os
     import random
+    import re
+    import datetime
     import GRIBDownloader as gd
 
     # Check if the test/000 folder exists
-    test_folder = "./download/test/000"
+    test_folder = "./download/test/012"
     if not os.path.exists(test_folder):
         # Download the GRIB data for the specified year range
         gd.download_grib_data(2013, 2013)
