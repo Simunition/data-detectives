@@ -80,7 +80,7 @@ def explore_year_folders():
 
     # Iterate through year folders
     for year_folder in year_folders:
-        if year_folder.isdigit() and 2013 <= int(year_folder) <= 2023:
+        if year_folder.isdigit() and 2013 <= int(year_folder) <= 2022:
             year_folder_path = os.path.join(remote_folder, year_folder)
             ftp.cwd(year_folder_path)
             subfolders = []
