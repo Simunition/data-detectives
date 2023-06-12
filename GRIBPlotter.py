@@ -31,6 +31,10 @@ def plot_grib(xarray_data):
     plt.title('500hPa Geopotential Height Zero-Hour Forecast for ' + month + '/' + day + '/' + year)
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
+    
+    output_filename = "zero_hour_plot.png"
+    output_path = os.path.join('Output/', output_filename)
+    plt.savefig(output_path)
 
     # Show the plot
     plt.show()
