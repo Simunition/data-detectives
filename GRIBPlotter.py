@@ -20,7 +20,7 @@ def plot_grib(xarray_data):
     plt.contourf(lons, lats, data, transform=ccrs.PlateCarree())
 
     # Set title and labels
-    plt.title('500hPa on World Map')
+    plt.title('500hPa Geopotential Height')
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
 
