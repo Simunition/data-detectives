@@ -1,5 +1,4 @@
 import os
-import xarray as xr
 import cfgrib
 
 #Function to convert GRIB input to XArray
