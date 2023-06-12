@@ -1,4 +1,5 @@
 import GRIBLoader as gl
+import os
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 
