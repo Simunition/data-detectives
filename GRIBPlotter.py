@@ -30,6 +30,9 @@ def plot_grib(xarray_data):
 if __name__ == "__main__":
     import os
     import random
+    import GRIBDownloader as gd
+
+    gd.download_grib_data(2013, 2013)
     
     # Get list of files in the test/000 folder
     folder_path = "./download/test/000"
