@@ -39,8 +39,6 @@ def plot_grib(xarray_data):
 if __name__ == "__main__":
     import os
     import random
-    import re
-    import datetime
     import GRIBDownloader as gd
 
     # Check if the test/000 folder exists
