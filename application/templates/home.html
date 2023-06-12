@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Predictor: 12hr -> 0hr</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <h1>Weather Predictor: 12hr -> 0hr </h1>
+    <h2>Created By: Data Stormers</h2>
+    
+    <!-- Download results -->
+    <!--<button type="button" name="downloadFile" onclick="/getCSV">Download Results!</button>-->
+    <a href="/getCSV">Download Results!</a>
+    <br/>
+
+    <!-- Output results -->
+    <table class="table">
+        <tr class="table_header">
+          {% for header in headings %}
+          <th class="table_cell">{{ header }}</th>
+          {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="table_row">
+          {% for cell in row %}
+          <td class="table_cell">{{ cell }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+
+    </table>
+
+  </body>
+</html>

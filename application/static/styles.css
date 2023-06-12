@@ -1,0 +1,19 @@
+.table {
+    border-spacing: 0;
+}
+
+.table_row {
+    text-align: center;
+}
+
+.table_row:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.table_header {
+    text-align:  left;
+}
+
+.table_cell {
+    padding: 8px;
+}
