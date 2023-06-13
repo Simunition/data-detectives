@@ -5,7 +5,7 @@ def convert_grib(file_name):
     grib_input = file_name
 
     #Convert GRIB to XArray
-    x_out = pg.input_conversion(grib_input)
+    x_out = pg.xarray_conversion(grib_input)
     return x_out
 
 #Testing and CSV Output
