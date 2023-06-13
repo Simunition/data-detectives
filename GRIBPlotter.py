@@ -41,10 +41,11 @@ def plot_grib(xarray_data):
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
 
-    # Save plot
+    # Save and return plot
     output_filename = "zero_hour_plot.png"
     output_path = os.path.join('Output/', output_filename)
     plt.savefig(output_path)
+    return open(output_path)
 
 if __name__ == "__main__":
     import GRIBTester as tg
