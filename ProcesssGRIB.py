@@ -43,3 +43,6 @@ if __name__ == "__main__":
 
     #Test CSV Conversion
     csv_conversion(xarray_test)
+
+    #Test GRIB Conversion
+    xarray_test = grib_conversion(xarray_test)

@@ -1,4 +1,4 @@
-import GRIBLoader as gl
+import ProcesssGRIB as pg
 import os
 import numpy as np
 import cartopy.crs as ccrs
@@ -51,5 +51,5 @@ if __name__ == "__main__":
     grib_file = tg.get_grib()
 
     # Convert to XArray and plot
-    xarray_data = gl.convert_grib(grib_file)
+    xarray_data = pg.xarray_conversion(grib_file)
     plot_grib(xarray_data)
