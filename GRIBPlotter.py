@@ -47,7 +47,7 @@ def plot_grib(xarray_data):
     plt.savefig(output_path)
 
 if __name__ == "__main__":
-    import TestGRIB as tg
+    import GRIBTester as tg
     grib_file = tg.get_grib()
 
     # Convert to XArray and plot

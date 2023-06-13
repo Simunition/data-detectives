@@ -34,7 +34,7 @@ def grib_conversion(xarray_data, output_path):
     cfgrib.write(grib_data, output_path, index=False)
 
 if __name__ == "__main__":
-    import TestGRIB as tg
+    import GRIBTester as tg
     grib_file = tg.get_grib()
 
     #Test XArray Conversion
