@@ -1,4 +1,4 @@
-import ProcesssGRIB as pg
+import GRIBProcessor as pg
 import os
 import numpy as np
 import cartopy.crs as ccrs
