@@ -3,6 +3,7 @@ import random
 import shutil
 from ftplib import FTP
 
+# Function to download GRIB data from GODAE using FTP
 def download_grib_data(start_year, end_year):
     # FTP server details
     ftp_host = "usgodae.org"
@@ -37,6 +38,7 @@ def download_grib_data(start_year, end_year):
     ftp = FTP(ftp_host)
     ftp.login(ftp_user, ftp_pass)
 
+    # Function to download all 000/012 hour 500 hPa forecasts
     def download_files_from_folder(folder_path):
         # Change to the remote directory
         ftp.cwd(folder_path)

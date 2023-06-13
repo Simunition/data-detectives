@@ -24,6 +24,7 @@ def csv_conversion(meteo_arr):
     output_path = 'Output/csv_out.csv'
     met_frame.to_csv(output_path, index=False)
 
+# Function to convert XArray input to GRIB file
 def grib_conversion(xarray_data, output_path):
     # Convert XArray dataset to GRIB
     grib_data = xarray_data.to_dask().reset_coords(drop=True)
