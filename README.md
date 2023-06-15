@@ -1,4 +1,4 @@
-# Data Science Project
+# Data Science Project - 500hPa Forecasting
 
 95-829 Z3 Software Design for Data Scientists
 
@@ -15,7 +15,7 @@ Carnegie Mellon University
 - Stephanie Yee
 
 **Purpose:**
-Web application for the forecast 0-hour output.
+Web application for the forecast 0-hour output for 500 hPa using 12-hour NAVGEM input.
 
 **Langauge / Framework:**
 
