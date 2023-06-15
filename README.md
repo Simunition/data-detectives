@@ -25,11 +25,4 @@ Web application for the forecast 0-hour output.
 **Required Modules:**
 
 1. Anaconda Python
-2. apt install libeccodes-dev
-3. apt install libgeos-dev
-4. apt install libproj-dev
-5. apt install build-essential
-6. pip install cfgrib
-7. pip install cartopy
-8. pip install matplotlib
-9. pip install Flask
+2. pip install Flask
