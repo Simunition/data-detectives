@@ -1,8 +1,12 @@
-# home.py
+# __init__.py
 
-from flask import Flask, render_template, Response
+import os
+from flask import Flask, render_template, Response, request, redirect, url_for
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+
+app.config["UPLOAD_FOLDER"] = "static/"
 
 headings = ("Latitude","Longitude","Variable","Time","Step","Max Wind","Valid Time","met_d")
 data = (
@@ -14,6 +18,18 @@ data = (
 @app.route("/")
 def home():
     return render_template("home.html", headings=headings, data=data)
+
+@app.route("/gribUpload", methods=['GET','POST'])
+def file_upload():
+    if request.method == 'POST':
+        f = request.files['file']
+        filename = secure_filename(f.filename)
+        f.save(app.config['UPLOAD_FOLDER'] + filename)
+        #f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #file = open(app.config['UPLOAD_FOLDER'] + filename, "r")
+        #gribContent = file.read()
+
+    return redirect(request.referrer)
 
 @app.route("/getCSV")
 def getCSV():
