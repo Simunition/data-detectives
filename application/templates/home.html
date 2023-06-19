@@ -36,16 +36,6 @@
         let element = document.getElementById("plotimg");
         let hidden = element.getAttribute("hidden");
         element.removeAttribute("hidden");
-
-        // Wait until the image is available before refreshing the page
-        if (!image_loaded) {
-          let img = new Image();
-          img.onload = function() {
-            image_loaded = true;
-            window.location.reload();
-          };
-          img.src = "static/prediction_output.png";
-        }
       }
       
       let remove = button => {
