@@ -51,9 +51,14 @@ def submit_csv_out():
 @app.route("/submitPngOut", methods=['POST'])
 def submit_png_out():
     # get file from request.files
-    f = request.files['pngOut']
-    filename = secure_filename(f.filename)
-    f.save(app.config['UPLOAD_FOLDER'] + filename)
+    try:
+        f = request.files['pngOut']
+        filename = secure_filename(f.filename)
+        f.save(app.config['UPLOAD_FOLDER'] + filename)
+    except Exception as e:
+        logger.error(e)
+        return "Error saving file"
+
     # save the file to the location
     # return a 200 response with make_response
     return "OK"
