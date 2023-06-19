@@ -50,7 +50,7 @@ def submit_csv_out():
 
 @app.route("/submitPngOut", methods=['POST'])
 def submit_png_out():
-    # get file from request.files
+    # get file from request
     f = request.files['pngOut']
     filename = secure_filename(f.filename)
     f.save(app.config['UPLOAD_FOLDER'] + filename)
