@@ -30,18 +30,22 @@
     <img id="plotimg" src="static/prediction_output.png" hidden="" alt="Zero Hour Plot"/>
     
     <script>
+      let image_loaded = false;
       let showplot = button => {
         let element = document.getElementById("plotimg");
         let hidden = element.getAttribute("hidden");
         element.removeAttribute("hidden");
+
+        // Wait until the image is available before refreshing the page
+        if (!image_loaded) {
+          let img = new Image();
+          img.onload = function() {
+            image_loaded = true;
+            window.location.reload();
+          };
+          img.src = "/static/prediction_output.png";
+        }
       }
-      
-      // Wait until the image is available before refreshing the page
-        let img = new Image();
-        img.onload = function() {
-          window.location.reload();
-        };
-        img.src = "static/prediction_output.png";
       
       let remove = button => {
         let element = document.getElementById("plotimg");
