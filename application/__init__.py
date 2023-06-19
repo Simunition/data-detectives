@@ -60,7 +60,7 @@ def submit_png_out():
 
 @app.route("/getCSV")
 def getCSV():
-    with open("prediction_output.csv") as fp:
+    with open("static/prediction_output.csv") as fp:
         csv = fp.read()
    
     return Response(
