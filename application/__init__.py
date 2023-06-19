@@ -7,7 +7,7 @@ import requests
 
 app = Flask(__name__)
 
-app.config["UPLOAD_FOLDER"] = "static/"
+app.config["UPLOAD_FOLDER"] = "uploads/"
 
 #MODEL_URL = "http://127.0.0.1:5001"
 MODEL_URL = "https://weather-prediction-model-app-de2cee4878db.herokuapp.com"
@@ -25,16 +25,17 @@ def home():
 
 @app.route("/gribUpload", methods=['GET','POST'])
 def file_upload():
-    if request.method == 'POST':
+    try:
         f = request.files['file']
         filename = secure_filename(f.filename)
         f.save(app.config['UPLOAD_FOLDER'] + filename)
         f_location = app.config['UPLOAD_FOLDER'] + filename
-        #f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        #file = open(app.config['UPLOAD_FOLDER'] + filename, "r")
-        #gribContent = file.read()
-        url = MODEL_URL + "/api" #heroku URL needed here
-        forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
+    except Exception as e:
+        logger.error(e)
+        return "Error saving file"
+
+    url = MODEL_URL + "/api" #heroku URL needed here
+    forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
 
     return redirect(request.referrer)
 
