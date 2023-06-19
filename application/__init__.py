@@ -7,7 +7,7 @@ import requests
 
 app = Flask(__name__)
 
-app.config["UPLOAD_FOLDER"] = "uploads/"
+app.config["UPLOAD_FOLDER"] = "static/"
 
 #MODEL_URL = "http://127.0.0.1:5001"
 MODEL_URL = "https://weather-prediction-model-app-de2cee4878db.herokuapp.com"
@@ -25,17 +25,16 @@ def home():
 
 @app.route("/gribUpload", methods=['GET','POST'])
 def file_upload():
-    try:
+    if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)
         f.save(app.config['UPLOAD_FOLDER'] + filename)
         f_location = app.config['UPLOAD_FOLDER'] + filename
-    except Exception as e:
-        logger.error(e)
-        return "Error saving file"
-
-    url = MODEL_URL + "/api" #heroku URL needed here
-    forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
+        #f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #file = open(app.config['UPLOAD_FOLDER'] + filename, "r")
+        #gribContent = file.read()
+        url = MODEL_URL + "/api" #heroku URL needed here
+        forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
 
     return redirect(request.referrer)
 
@@ -52,14 +51,9 @@ def submit_csv_out():
 @app.route("/submitPngOut", methods=['POST'])
 def submit_png_out():
     # get file from request.files
-    try:
-        f = request.files['pngOut']
-        filename = secure_filename(f.filename)
-        f.save(app.config['UPLOAD_FOLDER'] + filename)
-    except Exception as e:
-        logger.error(e)
-        return "Error saving file"
-
+    f = request.files['pngOut']
+    filename = secure_filename(f.filename)
+    f.save(app.config['UPLOAD_FOLDER'] + filename)
     # save the file to the location
     # return a 200 response with make_response
     return "OK"
