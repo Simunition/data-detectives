@@ -16,18 +16,19 @@
         enctype = "multipart/form-data">
         <input type = "file" name = "file" />
         <br><br>
-        <input type = "submit" onclick="showplot(this)"/>
+        <input type = "submit"/>
         <input type = "reset" onclick="remove(this);"/>
     </form>  
     <br/>
     <!-- Download results -->
     <a href="/getCSV">Download CSV Results!</a>
+    <a href="/getPNG">Download PNG Results!</a>
     <br/>
     <!-- Output results as an image-->
     <!--<img src={{ url_for('static', filename='zero_hour_plot.png') }}" class="image" alt="Zero Hour Plot"/>-->
     Zero Hour Forecast Plot for File: {{filename}} 
     <br/>
-    <img id="plotimg" src="static/prediction_output.png" hidden="" alt="Zero Hour Plot"/>
+    <!--<img id="plotimg" src="static/prediction_output.png" hidden="" alt="Zero Hour Plot"/>-->
     
     <script>
       let showplot = button => {
