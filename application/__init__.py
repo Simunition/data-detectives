@@ -71,8 +71,7 @@ def getCSV():
 
 @app.route("/getPNG")
 def getPNG():
-    with open("static/prediction_output.png", "rb") as f:
-        png = f.read_binary()
+    png = open("static/prediction_output.png", "rb").read()
 
     return Response(
         png,
