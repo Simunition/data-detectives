@@ -28,10 +28,14 @@ def file_upload():
     if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        f_location = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        url = MODEL_URL + "/api"
-        forecast = requests.post(url, files={'gribFile': open(f_location, 'rb')})
+        f.save(app.config['UPLOAD_FOLDER'] + filename)
+        f_location = app.config['UPLOAD_FOLDER'] + filename
+        #f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #file = open(app.config['UPLOAD_FOLDER'] + filename, "r")
+        #gribContent = file.read()
+        url = MODEL_URL + "/api" #heroku URL needed here
+        forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
+
     return redirect(request.referrer)
 
 @app.route("/submitCsvOut", methods=['POST'])
@@ -56,7 +60,7 @@ def submit_png_out():
 
 @app.route("/getCSV")
 def getCSV():
-    with open("prediction_output.csv") as fp:
+    with open("static/prediction_output.csv") as fp:
         csv = fp.read()
    
     return Response(
@@ -64,17 +68,6 @@ def getCSV():
         mimetype="text/csv",
         headers={"Content-disposition":
                  "attachment; filename=prediction_output.csv"})
-
-@app.route("/getPNG")
-def getPNG():
-    with open("prediction_output.png") as fp:
-        csv = fp.read()
-   
-    return Response(
-        png,
-        mimetype="image/png",
-        headers={"Content-disposition":
-                 "attachment; filename=prediction_output.png"})
 
 if __name__ == "__main__":
     app.run(debug=True)
