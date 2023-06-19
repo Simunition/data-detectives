@@ -74,7 +74,7 @@ def getCSV():
                  "attachment; filename=prediction_output.csv"})
 
 @app.route("/getPNG")
-def getCSV():
+def getPNG():
     with open("static/prediction_output.png") as fp:
         csv = fp.read()
    
