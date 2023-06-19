@@ -43,7 +43,7 @@ def submit_csv_out():
     # get file from request.files
     f = request.files['csvOut']
     filename = secure_filename(f.filename)
-    f.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
+    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # save the file to the location
     # return a 200 response with make_response
     return "OK"
@@ -53,7 +53,7 @@ def submit_png_out():
     # get file from request
     f = request.files['pngOut']
     filename = secure_filename(f.filename)
-    f.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
+    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     with open(app.config['UPLOAD_FOLDER'] + filename, 'rb') as fp:
         png = fp.read()
     return Response(
