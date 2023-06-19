@@ -54,9 +54,13 @@ def submit_png_out():
     f = request.files['pngOut']
     filename = secure_filename(f.filename)
     f.save(app.config['UPLOAD_FOLDER'] + filename)
-    # save the file to the location
-    # return a 200 response with make_response
-    return "OK"
+    with open(app.config['UPLOAD_FOLDER'] + filename, 'rb') as fp:
+        png = fp.read()
+    return Response(
+        png,
+        mimetype="image/png",
+        headers={"Content-disposition":
+                 "attachment; filename=prediction_output.png"})
 
 @app.route("/getCSV")
 def getCSV():
