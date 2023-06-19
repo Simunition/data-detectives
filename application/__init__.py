@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/"
 
 #MODEL_URL = "http://127.0.0.1:5001"
-MODEL_URL = "https://weather-prediction-model-app-de2cee4878db.herokuapp.com/api"
+MODEL_URL = "https://weather-prediction-model-app-de2cee4878db.herokuapp.com"
 
 headings = ("Latitude","Longitude","Variable","Time","Step","Max Wind","Valid Time","met_d")
 data = (
