@@ -40,37 +40,27 @@ def file_upload():
 
 @app.route("/submitCsvOut", methods=['POST'])
 def submit_csv_out():
-    # get file from request
+    # get file from request.files
     f = request.files['csvOut']
     filename = secure_filename(f.filename)
     f.save(app.config['UPLOAD_FOLDER'] + filename)
     # save the file to the location
-    with open(app.config['UPLOAD_FOLDER'] + filename, 'rb') as fp:
-        csv = fp.read()
-    return Response(
-        csv,
-        mimetype="text/csv",
-        headers={"Content-disposition":
-                 "attachment; filename=prediction_output.csv"})
+    # return a 200 response with make_response
+    return "OK"
 
 @app.route("/submitPngOut", methods=['POST'])
 def submit_png_out():
-    # get file from request
+    # get file from request.files
     f = request.files['pngOut']
     filename = secure_filename(f.filename)
     f.save(app.config['UPLOAD_FOLDER'] + filename)
     # save the file to the location
-    with open(app.config['UPLOAD_FOLDER'] + filename, 'rb') as fp:
-        png = fp.read()
-    return Response(
-        png,
-        mimetype="image/png",
-        headers={"Content-disposition":
-                 "attachment; filename=prediction_output.png"})
+    # return a 200 response with make_response
+    return "OK"
 
 @app.route("/getCSV")
 def getCSV():
-    with open("static/prediction_output.csv") as fp:
+    with open("prediction_output.csv") as fp:
         csv = fp.read()
    
     return Response(
@@ -81,11 +71,11 @@ def getCSV():
 
 @app.route("/getPNG")
 def getPNG():
-    with open("static/prediction_output.png") as fp:
+    with open("prediction_output.png") as fp:
         csv = fp.read()
    
     return Response(
-        csv,
+        png,
         mimetype="image/png",
         headers={"Content-disposition":
                  "attachment; filename=prediction_output.png"})
