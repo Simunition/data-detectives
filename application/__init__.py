@@ -70,15 +70,14 @@ def getCSV():
                  "attachment; filename=prediction_output.csv"})
 
 @app.route("/getPNG")
-def getPNG():
-    with open("static/prediction_output.png") as fp:
-        png = fp.read()
-   
-    return Response(
-        png,
-        mimetype="image/png",
-        headers={"Content-disposition":
-                 "attachment; filename=prediction_output.png"})
+with open("static/prediction_output.png", "rb") as f:
+    png = f.read_binary()
+
+return Response(
+    png,
+    mimetype="image/png",
+    headers={"Content-disposition":
+             "attachment; filename=prediction_output.png"})
 
 if __name__ == "__main__":
     app.run(debug=True)
