@@ -28,14 +28,10 @@ def file_upload():
     if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)
-        f.save(app.config['UPLOAD_FOLDER'] + filename)
-        f_location = app.config['UPLOAD_FOLDER'] + filename
-        #f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        #file = open(app.config['UPLOAD_FOLDER'] + filename, "r")
-        #gribContent = file.read()
-        url = MODEL_URL + "/api" #heroku URL needed here
-        forecast = requests.post(url, files={'gribFile': open(f_location,'rb')})
-
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        f_location = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        url = MODEL_URL + "/api"
+        forecast = requests.post(url, files={'gribFile': open(f_location, 'rb')})
     return redirect(request.referrer)
 
 @app.route("/submitCsvOut", methods=['POST'])
