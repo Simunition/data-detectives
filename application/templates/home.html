@@ -5,18 +5,17 @@
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <h1>Weather Predictor for 0-hr forecast </h1>
+    <h1>Weather Predictor for 0-hr forecast</h1>
     <h2>Created By: Data Stormers</h2>
     
     <br/>
     Upload GRIB1 file for model prediction.
     <!-- Upload GRIB1 file -->
-    <form action = "/gribUpload" method = "POST" 
-        enctype = "multipart/form-data">
-        <input type = "file" name = "file" />
+    <form action="/gribUpload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" />
         <br><br>
-        <input type = "submit" onclick="showplot(this);"/>
-        <input type = "reset" onclick="remove(this);"/>
+        <input type="submit" id="submit" onclick="showplot(this);" />
+        <input type="reset" onclick="remove(this);" />
     </form>  
     <br/>
     <!-- Download results -->
