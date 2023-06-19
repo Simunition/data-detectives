@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -37,25 +36,7 @@
           element.removeAttribute("hidden");
         }, 15000);
       }
+      document.getElementById("submit").addEventListener("click", showplot);
     </script>
-    
-    <!-- Output results as a table-->
-    <!--
-    <table class="table">
-        <tr class="table_header">
-          {% for header in headings %}
-          <th class="table_cell">{{ header }}</th>
-          {% endfor %}
-        </tr>
-        {% for row in data %}
-        <tr class="table_row">
-          {% for cell in row %}
-          <td class="table_cell">{{ cell }}</td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
-
-    </table>-->
-
   </body>
 </html>
